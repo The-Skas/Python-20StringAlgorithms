@@ -125,8 +125,5 @@ def get_first_unique_character(aStr):
 
 
 if __name__ == '__main__':
-
-	a = StringsQ()
-
-	print StringsQ.get_first_unique_character("Saywhat")
+	print "Yeeehaw!"
 
