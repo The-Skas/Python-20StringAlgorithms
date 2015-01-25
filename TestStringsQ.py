@@ -1,4 +1,4 @@
-from stringsq import StringsQ
+from stringsq import *
 from stringsq import InvalidTypeException
 import unittest
 
@@ -8,22 +8,22 @@ class TestStringsQ(unittest.TestCase):
 		pass
 
 	def test_get_duplicate_chars(self):
-		should_return_an_empty_string = StringsQ.get_duplicate_chars("heyo")
+		should_return_an_empty_string = get_duplicate_chars("heyo")
 		self.assertEqual("", should_return_an_empty_string)
 
-		should_return_l = StringsQ.get_duplicate_chars("hello")
+		should_return_l = get_duplicate_chars("hello")
 		self.assertEqual("l", should_return_l)
 
-		should_return_r = StringsQ.get_duplicate_chars("rawr")
+		should_return_r = get_duplicate_chars("rawr")
 		self.assertEqual("r", should_return_r)
 
-		should_return_l = StringsQ.get_duplicate_chars("hello")
+		should_return_l = get_duplicate_chars("hello")
 		self.assertEqual("l", should_return_l)
 
-		self.assertRaises(InvalidTypeException, StringsQ.get_duplicate_chars,None)
+		self.assertRaises(InvalidTypeException, get_duplicate_chars,None)
 
-		self.assertRaises(InvalidTypeException, StringsQ.get_duplicate_chars, "")
-		StringsQ.get_duplicate_chars("HEYO WHATS YOUR PROBLEM")
+		self.assertRaises(InvalidTypeException, get_duplicate_chars, "")
+		get_duplicate_chars("HEYO WHATS YOUR PROBLEM")
 	
 
 	"""
@@ -61,7 +61,7 @@ class TestStringsQ(unittest.TestCase):
 		# Skas: Omg i'm making these these list comprehensions 
 		# look ugly :0. Laziness Prevails!
 		
-		[self.assertEqual(condition, StringsQ.are_anagrams(x,y),msg(x,y)) \
+		[self.assertEqual(condition, are_anagrams(x,y),msg(x,y)) \
 			for x,y,condition in anagram_input] 
 
 		del msg
@@ -100,11 +100,11 @@ class TestStringsQ(unittest.TestCase):
 		# 	Skas: I know it looks ugly :{ ! Just doing it for the sake of learning!
 		
 		# Assert Equal
-		[self.assertEqual(StringsQ.get_first_unique_character(input_str), result_char) \
+		[self.assertEqual(get_first_unique_character(input_str), result_char) \
 			for input_str,result_char in unique_input_equals] 
 
 		# Assert Not Equal
-		[self.assertNotEqual(StringsQ.get_first_unique_character(input_str), result_char) \
+		[self.assertNotEqual(get_first_unique_character(input_str), result_char) \
 			for input_str,result_char in unique_input_not_equals]  
 
 

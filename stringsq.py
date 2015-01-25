@@ -1,11 +1,5 @@
-import pdb
-
-
-class InvalidTypeException(Exception):
-	pass
-
 """
-	This class is my attempt to go through string algorithms most frequently
+	This file is my attempt to go through string algorithms most frequently
 	encountered in programming interviews.
 
 	*article these questions are based on: 
@@ -14,119 +8,117 @@ class InvalidTypeException(Exception):
 	@author: The-Skas
 """
 
-class StringsQ(object):
-	def __init__(self):
-		pass
-	@staticmethod
-	def _checkInput(aStr):
-		"""
-			Common checks to make sure the parameter passed to a method
-				is a string.
-		"""
-		error_msg = "The parameter needs to be of type: 'str' \n\tinstead it is of type: "+str(type(aStr).__name__)
-		if(isinstance(aStr,str) == False):
-			raise InvalidTypeException(error_msg)
-		elif( not aStr):
-			raise InvalidTypeException("Parameter was an empty string.")
-	
-	@staticmethod
-	def _dict_of_character_count(self,dict, str, i):
-		""" Builds a dictionary of character count from a string. 
-			The method is intended to be used with list comprehensions.
-		"""
-		value = dict.get(str[i],0)
-		dict[str[i]] = value + 1
+class InvalidTypeException(Exception):
+	pass
 
-	@classmethod
-	def get_duplicate_chars(self,aStr):
-		"""
-			gets a String of duplicate characters from the arguement.
+def _checkInput(aStr):
+	"""
+		Common checks to make sure the parameter passed to a method
+			is a string.
+	"""
+	error_msg = "The parameter needs to be of type: 'str' \n\tinstead it is of type: "+str(type(aStr).__name__)
+	if(isinstance(aStr,str) == False):
+		raise InvalidTypeException(error_msg)
+	elif( not aStr):
+		raise InvalidTypeException("Parameter was an empty string.")
 
-			return: 
-				*-Returns a String of duplicate characters from the arguement
-				!-Otherwise, Returns an empty string ("")
 
-		"""
-		self._checkInput(aStr)
+def _dict_of_character_count(dict, str, i):
+	""" Builds a dictionary of character count from a string. 
+		The method is intended to be used with list comprehensions.
+	"""
+	value = dict.get(str[i],0)
+	dict[str[i]] = value + 1
 
-		duplicate_chars = ""
 
-		for i in xrange(0,len(aStr)):
-			for j in xrange(i, len(aStr)):
-				if(aStr[i] == aStr[j] and i != j):
-					duplicate_chars += aStr[i]
+def get_duplicate_chars(aStr):
+	"""
+		gets a String of duplicate characters from the arguement.
 
-		return duplicate_chars
-	
-	@classmethod	
-	def are_anagrams(self,str1,str2):
-		"""
-			Returns True if the two strings passed are anagrams.
-				False otherwise.
+		return: 
+			*-Returns a String of duplicate characters from the arguement
+			!-Otherwise, Returns an empty string ("")
 
-			str1 -- a string.
-			str2 -- another string.
-			returns: True/False.
-		"""
-		import re 
+	"""
+	_checkInput(aStr)
 
-		map(self._checkInput, [str1,str2])
+	duplicate_chars = ""
 
-		# Strips anythings thats not a number, a word or underscore from the parameters
-		str1 = re.sub("\W+", '', str1)
-		str2 = re.sub("\W+", '', str2)
+	for i in xrange(0,len(aStr)):
+		for j in xrange(i, len(aStr)):
+			if(aStr[i] == aStr[j] and i != j):
+				duplicate_chars += aStr[i]
 
-		# Make sure its lower case and strip it of spaces
-		str1 = str1.lower().strip()
-		str2 = str2.lower().strip()
+	return duplicate_chars
 
-		if (len(str1) != len(str2)):
+
+def are_anagrams(str1,str2):
+	"""
+		Returns True if the two strings passed are anagrams.
+			False otherwise.
+
+		str1 -- a string.
+		str2 -- another string.
+		returns: True/False.
+	"""
+	import re 
+
+	map(_checkInput, [str1,str2])
+
+	# Strips anythings thats not a number, a word or underscore from the parameters
+	str1 = re.sub("\W+", '', str1)
+	str2 = re.sub("\W+", '', str2)
+
+	# Make sure its lower case and strip it of spaces
+	str1 = str1.lower().strip()
+	str2 = str2.lower().strip()
+
+	if (len(str1) != len(str2)):
+		return False
+
+	dict1_CharacterCount = {}
+	dict2_CharacterCount = {}
+
+	#this method is created for the sake of modularity.
+
+	for x in xrange(len(str1)):
+		_dict_of_character_count(dict1_CharacterCount, str1, x)
+		_dict_of_character_count(dict2_CharacterCount, str2, x)
+
+	for key1,value1 in dict1_CharacterCount.iteritems():
+		value2 = dict2_CharacterCount.get(key1,0)
+		if(value1 != value2):
 			return False
 
-		dict1_CharacterCount = {}
-		dict2_CharacterCount = {}
+	return True
+	# Now 
 
-		#this method is created for the sake of modularity.
 
-		for x in xrange(len(str1)):
-			self._dict_of_character_count(self,dict1_CharacterCount, str1, x)
-			self._dict_of_character_count(self,dict2_CharacterCount, str2, x)
+def get_first_unique_character(aStr):
+	"""
+		Returns the first unique character found in a String
+			(the character should only occur once).
 
-		for key1,value1 in dict1_CharacterCount.iteritems():
-			value2 = dict2_CharacterCount.get(key1,0)
-			if(value1 != value2):
-				return False
+		aStr -- a String
 
-		return True
-		# Now 
-	
+		returns: 
+			*-a single Character if a unique character is found
+			!-otherwise returns an empty string.
+	"""
+	_checkInput(aStr)
 
-	@classmethod
-	def get_first_unique_character(self, aStr):
-		"""
-			Returns the first unique character found in a String
-				(the character should only occur once).
+	aStr = aStr.lower() 
 
-			aStr -- a String
+	# Omg i'm making these these list comprehensions 
+	# look ugly :O
+	aStr_count_dict = {}
+	[_dict_of_character_count(aStr_count_dict, aStr, i) for i in range(len(aStr))]
 
-			returns: 
-				*-a single Character if a unique character is found
-				!-otherwise returns an empty string.
-		"""
-		self._checkInput(aStr)
+	for char in aStr:
+		if(aStr_count_dict[char] == 1):
+			return char
 
-		aStr = aStr.lower() 
-
-		# Omg i'm making these these list comprehensions 
-		# look ugly :O
-		aStr_count_dict = {}
-		[self._dict_of_character_count(self,aStr_count_dict, aStr, i) for i in range(len(aStr))]
-
-		for char in aStr:
-			if(aStr_count_dict[char] == 1):
-				return char
-
-		return ""
+	return ""
 
 
 
