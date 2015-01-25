@@ -61,8 +61,8 @@ class TestStringsQ(unittest.TestCase):
 		# Skas: Omg i'm making these these list comprehensions 
 		# look ugly :0. Laziness Prevails!
 		
-		[self.assertEqual(condition, are_anagrams(x,y),msg(x,y)) \
-			for x,y,condition in anagram_input] 
+		[self.assertEqual(condition, are_anagrams(x, y), msg(x, y)) \
+			for x, y, condition in anagram_input] 
 
 		del msg
 

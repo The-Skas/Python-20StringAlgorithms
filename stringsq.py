@@ -44,7 +44,7 @@ def get_duplicate_chars(aStr):
 
 	duplicate_chars = ""
 
-	for i in xrange(0,len(aStr)):
+	for i in xrange(0, len(aStr)):
 		for j in xrange(i, len(aStr)):
 			if(aStr[i] == aStr[j] and i != j):
 				duplicate_chars += aStr[i]
@@ -63,7 +63,7 @@ def are_anagrams(str1,str2):
 	"""
 	import re 
 
-	map(_checkInput, [str1,str2])
+	map(_checkInput, [str1, str2])
 
 	# Strips anythings thats not a number, a word or underscore from the parameters
 	str1 = re.sub("\W+", '', str1)
@@ -86,7 +86,7 @@ def are_anagrams(str1,str2):
 		_dict_of_character_count(dict2_CharacterCount, str2, x)
 
 	for key1,value1 in dict1_CharacterCount.iteritems():
-		value2 = dict2_CharacterCount.get(key1,0)
+		value2 = dict2_CharacterCount.get(key1, 0)
 		if(value1 != value2):
 			return False
 
