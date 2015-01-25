@@ -1,18 +1,28 @@
 import pdb
-# Duplicate characters in a str
-# 
+
+
 class InvalidTypeException(Exception):
 	pass
+
+"""
+	This class is my attempt to go through string algorithms most frequently
+	encountered in programming interviews.
+
+	*article these questions are based on: 
+		http://javarevisited.blogspot.co.uk/2015/01/top-20-string-coding-interview-question-programming-interview.html
+
+	@author: The-Skas
+"""
 
 class StringsQ(object):
 	def __init__(self):
 		pass
-
-	"""
-	A private class method for input sanitization
-	"""
 	@staticmethod
 	def _checkInput(aStr):
+		"""
+			Common checks to make sure the parameter passed to a method
+				is a string.
+		"""
 		error_msg = "The parameter needs to be of type: 'str' \n\tinstead it is of type: "+str(type(aStr).__name__)
 		if(isinstance(aStr,str) == False):
 			raise InvalidTypeException(error_msg)
@@ -21,12 +31,22 @@ class StringsQ(object):
 	
 	@staticmethod
 	def _dict_of_character_count(self,dict, str, i):
+		""" Builds a dictionary of character count from a string. 
+			The method is intended to be used with list comprehensions.
+		"""
 		value = dict.get(str[i],0)
 		dict[str[i]] = value + 1
 
 	@classmethod
 	def get_duplicate_chars(self,aStr):
-		# Make sure type is 'str'
+		"""
+			gets a String of duplicate characters from the arguement.
+
+			return: 
+				*-Returns a String of duplicate characters from the arguement
+				!-Otherwise, Returns an empty string ("")
+
+		"""
 		self._checkInput(aStr)
 
 		duplicate_chars = ""
@@ -37,11 +57,17 @@ class StringsQ(object):
 					duplicate_chars += aStr[i]
 
 		return duplicate_chars
-		# Make sure it returns a str
-		# 
 	
 	@classmethod	
 	def are_anagrams(self,str1,str2):
+		"""
+			Returns True if the two strings passed are anagrams.
+				False otherwise.
+
+			str1 -- a string.
+			str2 -- another string.
+			returns: True/False.
+		"""
 		import re 
 
 		map(self._checkInput, [str1,str2])
@@ -61,15 +87,10 @@ class StringsQ(object):
 		dict2_CharacterCount = {}
 
 		#this method is created for the sake of modularity.
-		def dict_of_character_count(dict, str, i):
-				value = dict.get(str[i],0)
-				dict[str[i]] = value + 1
 
 		for x in xrange(len(str1)):
-			dict_of_character_count(dict1_CharacterCount, str1, x)
-			dict_of_character_count(dict2_CharacterCount, str2, x)
-
-		del dict_of_character_count
+			self._dict_of_character_count(self,dict1_CharacterCount, str1, x)
+			self._dict_of_character_count(self,dict2_CharacterCount, str2, x)
 
 		for key1,value1 in dict1_CharacterCount.iteritems():
 			value2 = dict2_CharacterCount.get(key1,0)
@@ -82,6 +103,16 @@ class StringsQ(object):
 
 	@classmethod
 	def get_first_unique_character(self, aStr):
+		"""
+			Returns the first unique character found in a String
+				(the character should only occur once).
+
+			aStr -- a String
+
+			returns: 
+				*-a single Character if a unique character is found
+				!-otherwise returns an empty string.
+		"""
 		self._checkInput(aStr)
 
 		aStr = aStr.lower() 

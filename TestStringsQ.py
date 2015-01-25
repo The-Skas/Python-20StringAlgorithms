@@ -76,7 +76,7 @@ class TestStringsQ(unittest.TestCase):
 			tuple2: Character that should be returned
 
 		"""
-		unique_input = (
+		unique_input_equals = (
 				# When unique characters found
 				("Hello",   "h"),
 				("ehlol",   "e"),
@@ -87,17 +87,26 @@ class TestStringsQ(unittest.TestCase):
 				("!!hhkk",   ""),
 				("hkkkkh!!", "")
 			)
-
+		
+		#
+		unique_input_not_equals = (
+				("Hello",   "e"),
+				("hhelo",   "l"),
+				("!!", "!"),
+				("Hello", "H") 
+			)
 
 		# Runs a test on all the inputs
 		# 	Skas: I know it looks ugly :{ ! Just doing it for the sake of learning!
-		# 	
-		[self.assertEqual(StringsQ.get_first_unique_character(input_str), result_char) \
-			for input_str,result_char in unique_input] 
-
-
 		
-			
+		# Assert Equal
+		[self.assertEqual(StringsQ.get_first_unique_character(input_str), result_char) \
+			for input_str,result_char in unique_input_equals] 
+
+		# Assert Not Equal
+		[self.assertNotEqual(StringsQ.get_first_unique_character(input_str), result_char) \
+			for input_str,result_char in unique_input_not_equals]  
+
 
 if __name__ == '__main__':
 	unittest.main()
