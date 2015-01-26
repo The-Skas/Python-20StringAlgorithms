@@ -1,5 +1,4 @@
 from stringsq import *
-from stringsq import InvalidTypeException
 import unittest
 
 class TestStringsQ(unittest.TestCase):
@@ -20,15 +19,12 @@ class TestStringsQ(unittest.TestCase):
 		should_return_l = get_duplicate_chars("hello")
 		self.assertEqual("l", should_return_l)
 
-		self.assertRaises(InvalidTypeException, get_duplicate_chars,None)
+		self.assertRaises(TypeError, get_duplicate_chars,None)
 
-		self.assertRaises(InvalidTypeException, get_duplicate_chars, "")
-		get_duplicate_chars("HEYO WHATS YOUR PROBLEM")
+		self.assertRaises(TypeError, get_duplicate_chars, "")
 	
 
-	"""
-	Test Anagrams
-	"""		
+	
 	def test_are_anagrams(self):
 		"""
 		Format of tuples is as follows

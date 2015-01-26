@@ -13,14 +13,14 @@ class InvalidTypeException(Exception):
 
 def _checkInput(aStr):
 	"""
-		Common checks to make sure the parameter passed to a method
-			is a string.
+	Common checks to make sure the parameter passed to a method
+		is a string.
 	"""
-	error_msg = "The parameter needs to be of type: 'str' \n\tinstead it is of type: "+str(type(aStr).__name__)
-	if(isinstance(aStr,str) == False):
-		raise InvalidTypeException(error_msg)
-	elif( not aStr):
-		raise InvalidTypeException("Parameter was an empty string.")
+	error_msg = "The parameter needs to be of type: 'str' \n\tinstead it is of type: "+ type(aStr).__name__
+	if not isinstance(aStr,str):
+		raise TypeError(error_msg)
+	elif not aStr:
+		raise TypeError("Parameter was an empty string.")
 
 
 def _dict_of_character_count(dict, str, i):
