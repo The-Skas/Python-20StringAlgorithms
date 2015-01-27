@@ -54,12 +54,12 @@ def get_duplicate_chars(aStr):
 
 def are_anagrams(str1,str2):
 	"""
-		Returns True if the two strings passed are anagrams.
-			False otherwise.
+	Returns True if the two strings passed are anagrams.
+		False otherwise.
 
-		str1 -- a string.
-		str2 -- another string.
-		returns: True/False.
+	str1 -- a string.
+	str2 -- another string.
+	returns: True/False.
 	"""
 	import re 
 
